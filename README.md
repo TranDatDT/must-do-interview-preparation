@@ -1,4 +1,4 @@
-## The most frequently asked questions in product based companies.
+## The most frequently asked coding interview questions in big companies like Amazon, Google, Microsoft,...
 
 Pull requests are welcome :)
 
