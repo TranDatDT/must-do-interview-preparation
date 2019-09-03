@@ -9,10 +9,7 @@ Time complexity: O(n)
 """
 
 
-from collections import deque
-
-
-def find_leaders(n: int, array: list) -> deque:
+def find_leaders(n: int, array: list) -> list:
     """Find leaders in an array
     
     Args:
@@ -20,29 +17,18 @@ def find_leaders(n: int, array: list) -> deque:
         array (list): The array
     
     Returns:
-        deque: list of leaders
+        list: list of leaders
     """
-    q: deque = deque([], n)
-    
-    for element in  array:
-        while len(q) and element > q[-1]:
-            q.pop()
-        q.append(element)
+    leaders: list = []
+    max_from_right: int = array[-1]
+    leaders.append(max_from_right)
 
-    return q
-
-
-def queue_to_str(q: deque) -> str:
-    """Queue to string
+    for index in range(n - 2, -1, -1):
+        if max_from_right <= array[index]:
+            max_from_right = array[index]
+            leaders.append(max_from_right)
     
-    Args:
-        q (dequeue): The queue
-    
-    Returns:
-        str:
-    """
-    elements: list = [str(element) for element in q]
-    return ' '.join(elements)
+    return leaders
 
 
 def main():
@@ -56,9 +42,10 @@ def main():
         # The array
         array: list = [int(number) for number in input().split()]
 
-        leaders: deque = find_leaders(n, array)
+        leaders: list = find_leaders(n, array)
 
-        print(queue_to_str(leaders))
+        while len(leaders):
+            print(leaders.pop(), end=" ")
 
         t -= 1
 
